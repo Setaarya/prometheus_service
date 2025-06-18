@@ -1,0 +1,20 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: "tf-serving-monitor"
+
+scrape_configs:
+  # Scrape TensorFlow Serving metrics
+  - job_name: "tensorflow-serving"
+    scrape_interval: 15s 
+    metrics_path: /monitoring/prometheus/metrics
+    scheme: https
+    static_configs:
+      - targets: ['mlops-production-fd3b.up.railway.app']
+    
+  # Scrape Prometheus itself
+  - job_name: "prometheus"
+    scrape_interval: 15s
+    static_configs:
+      - targets: ['localhost:9090']
