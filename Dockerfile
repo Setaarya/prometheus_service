@@ -6,8 +6,9 @@ COPY prometheus.yml /etc/prometheus/prometheus.yml
 # Expose port untuk Railway
 EXPOSE 9090
 
-# Override default command untuk Railway
-CMD ["--config.file=/etc/prometheus/prometheus.yml", \
+# Correct CMD format - butuh executable path
+CMD ["/bin/prometheus", \
+     "--config.file=/etc/prometheus/prometheus.yml", \
      "--storage.tsdb.path=/prometheus", \
      "--web.console.libraries=/etc/prometheus/console_libraries", \
      "--web.console.templates=/etc/prometheus/consoles", \
